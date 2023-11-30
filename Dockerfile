@@ -1,4 +1,5 @@
-FROM docker-hub-remote.bahnhub.tech.rz.db.de/alpine:3.15 as builder
+FROM alpine:3.15 as builder
+
 RUN apk update && apk add python3 py3-pip python3-dev gcc libc-dev alpine-sdk
 COPY requirements.txt .
 RUN pip install -r requirements.txt
@@ -9,7 +10,7 @@ COPY MANIFEST.in .
 COPY README.md .
 RUN python3 setup.py sdist
 
-FROM docker-hub-remote.bahnhub.tech.rz.db.de/alpine:3.15
+FROM alpine:3.15
 RUN apk update && apk add python3 py3-pip python3-dev gcc libc-dev alpine-sdk
 COPY requirements.txt .
 RUN pip install -r requirements.txt
